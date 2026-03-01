@@ -20,18 +20,11 @@
         .vip-badge { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
         .free-badge { background: linear-gradient(135deg, #48bb78 0%, #38a169 100%); }
         
-        /* 阅读主题 */
         .theme-default { background-color: #ffffff; color: #1a202c; }
         .theme-dark { background-color: #1a202c; color: #e2e8f0; }
         .theme-sepia { background-color: #f4ecd8; color: #433422; }
         .theme-green { background-color: #e8f5e9; color: #1b5e20; }
-        .theme-blue { background-color: #e3f2fd; color: #0d47a1; }
         
-        /* 翻页模式 */
-        .page-mode-scroll { overflow-y: auto; }
-        .page-mode-page { overflow: hidden; column-width: 100vw; height: 100vh; column-gap: 0; }
-        
-        /* 自定义滚动条 */
         .custom-scroll::-webkit-scrollbar { width: 8px; }
         .custom-scroll::-webkit-scrollbar-track { background: transparent; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 4px; }
@@ -40,104 +33,51 @@
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
 
-    <!-- 登录/注册界面 -->
-    <div id="authScreen" class="fixed inset-0 z-50 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center overflow-y-auto py-10">
-        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 w-full max-w-md mx-4 animate-fade-in my-auto">
-            <!-- Logo -->
+    <!-- 登录界面（已移除注册功能） -->
+    <div id="authScreen" class="fixed inset-0 z-50 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 w-full max-w-md mx-4 animate-fade-in">
             <div class="text-center mb-8">
-                <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white font-bold text-2xl mx-auto mb-4 shadow-lg">
+                <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white font-bold text-3xl mx-auto mb-4 shadow-lg">
                     书
                 </div>
-                <h1 class="text-2xl font-bold text-gray-900 dark:text-white">云书阁</h1>
-                <p class="text-gray-500 dark:text-gray-400 mt-2">沉浸式阅读体验</p>
+                <h1 class="text-3xl font-bold text-gray-900 dark:text-white">云书阁</h1>
+                <p class="text-gray-500 dark:text-gray-400 mt-2">封闭式读书管理平台</p>
             </div>
             
-            <!-- 切换标签 -->
-            <div class="flex mb-6 bg-gray-100 dark:bg-gray-700 rounded-xl p-1">
-                <button onclick="switchAuthTab('login')" id="tab-login" class="flex-1 py-2 rounded-lg text-sm font-medium transition-all bg-white dark:bg-gray-600 shadow-sm text-gray-900 dark:text-white">
-                    登录
-                </button>
-                <button onclick="switchAuthTab('register')" id="tab-register" class="flex-1 py-2 rounded-lg text-sm font-medium transition-all text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
-                    注册
-                </button>
-            </div>
-            
-            <!-- 登录表单 -->
-            <form id="loginForm" class="space-y-4">
+            <form id="loginForm" class="space-y-5">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">用户名</label>
-                    <input type="text" id="loginUsername" required placeholder="输入用户名" 
-                        class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">用户名</label>
+                    <input type="text" id="loginUsername" required placeholder="请输入用户名" 
+                        class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-lg">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">密码</label>
-                    <input type="password" id="loginPassword" required placeholder="输入密码" 
-                        class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">密码</label>
+                    <input type="password" id="loginPassword" required placeholder="请输入密码" 
+                        class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-lg">
                 </div>
-                <div class="flex justify-between text-sm">
+                <div class="flex justify-between items-center text-sm">
                     <label class="flex items-center text-gray-500 dark:text-gray-400 cursor-pointer">
                         <input type="checkbox" id="rememberMe" class="mr-2 rounded text-blue-600 focus:ring-blue-500"> 记住我
                     </label>
-                    <button type="button" onclick="showForgotPassword()" class="text-blue-600 hover:text-blue-700 dark:text-blue-400">忘记密码?</button>
                 </div>
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-lg">
                     登录
                 </button>
             </form>
-
-            <!-- 注册表单（默认隐藏） -->
-            <form id="registerForm" class="space-y-4 hidden">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">用户名 *</label>
-                    <input type="text" id="regUsername" required placeholder="3-20位字符" minlength="3" maxlength="20"
-                        class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                    <p class="text-xs text-gray-500 mt-1">用户名注册后不可修改</p>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">昵称</label>
-                    <input type="text" id="regNickname" placeholder="显示名称（可选）" 
-                        class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">密码 *</label>
-                    <input type="password" id="regPassword" required placeholder="至少6位密码" minlength="6"
-                        class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">确认密码 *</label>
-                    <input type="password" id="regPasswordConfirm" required placeholder="再次输入密码" 
-                        class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                </div>
-                <div class="flex items-start">
-                    <input type="checkbox" id="agreeTerms" required class="mt-1 mr-2 rounded text-blue-600 focus:ring-blue-500">
-                    <label class="text-xs text-gray-500 dark:text-gray-400">
-                        我已阅读并同意 <a href="#" class="text-blue-600 hover:underline">用户协议</a> 和 <a href="#" class="text-blue-600 hover:underline">隐私政策</a>
-                    </label>
-                </div>
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                    立即注册
-                </button>
-            </form>
             
-            <!-- 快速试玩 -->
-            <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-                <p class="text-center text-sm text-gray-500 dark:text-gray-400 mb-3">快速试玩</p>
-                <div class="grid grid-cols-3 gap-2 text-xs">
-                    <button onclick="quickLogin('user')" class="px-3 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors text-gray-700 dark:text-gray-300">
-                        普通用户
-                    </button>
-                    <button onclick="quickLogin('vip')" class="px-3 py-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg hover:bg-purple-200 dark:hover:bg-purple-900/50 transition-colors text-purple-700 dark:text-purple-300">
-                        VIP用户
-                    </button>
-                    <button onclick="quickLogin('admin')" class="px-3 py-2 bg-red-100 dark:bg-red-900/30 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors text-red-700 dark:text-red-300">
-                        管理员
-                    </button>
+            <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 text-center">
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-3">本平台已关闭公开注册</p>
+                <p class="text-xs text-gray-400 dark:text-gray-500">如需账号，请联系管理员 <span class="text-blue-600 font-medium">云书阁</span></p>
+                
+                <div class="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                    <p class="text-xs text-blue-600 dark:text-blue-400 font-medium">管理员账号：云书阁</p>
+                    <p class="text-xs text-blue-600 dark:text-blue-400 mt-1">密码：YSG88888888</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 主应用容器（初始隐藏） -->
+    <!-- 主应用容器 -->
     <div id="mainApp" class="hidden min-h-screen flex-col">
         
         <!-- 顶部导航 -->
@@ -153,7 +93,6 @@
                         </h1>
                     </div>
                     
-                    <!-- 搜索栏 -->
                     <div class="hidden md:flex flex-1 max-w-lg mx-8">
                         <div class="relative w-full">
                             <input type="text" id="searchInput" placeholder="搜索书名、作者、分类..." 
@@ -166,32 +105,27 @@
                     </div>
 
                     <div class="flex items-center space-x-3">
-                        <!-- 数据备份按钮（管理员） -->
-                        <button id="backupBtn" onclick="showBackupModal()" class="hidden p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors" title="数据备份">
+                        <button id="backupBtn" onclick="showBackupModal()" class="hidden p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors" title="数据管理">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
                         </button>
 
-                        <!-- 管理员入口 -->
                         <button id="adminBtn" onclick="showPage('admin')" class="hidden px-4 py-2 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-sm font-medium hover:bg-red-200 dark:hover:bg-red-900/50 transition-all">
                             管理后台
                         </button>
 
-                        <!-- 用户菜单 -->
                         <div class="relative" id="userMenu">
                             <button onclick="toggleUserDropdown()" class="flex items-center space-x-2 px-3 py-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all">
-                                <img id="userAvatar" src="" class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 hidden" alt="">
                                 <div id="userAvatarFallback" class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white text-sm font-bold">
-                                    U
+                                    云
                                 </div>
-                                <span class="hidden sm:block text-sm font-medium text-gray-700 dark:text-gray-200 max-w-[80px] truncate" id="userDisplayName">用户</span>
+                                <span class="hidden sm:block text-sm font-medium text-gray-700 dark:text-gray-200 max-w-[100px] truncate" id="userDisplayName">云书阁</span>
                                 <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </button>
                             
-                            <!-- 下拉菜单 -->
                             <div id="userDropdown" class="hidden absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50">
                                 <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
-                                    <p class="text-sm font-bold text-gray-900 dark:text-white" id="dropdownUsername">用户名</p>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1" id="dropdownRole">普通用户</p>
+                                    <p class="text-sm font-bold text-gray-900 dark:text-white" id="dropdownUsername">云书阁</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1" id="dropdownRole">管理员</p>
                                     <div class="mt-2 flex items-center justify-between">
                                         <span class="text-xs text-gray-500">阅读时长</span>
                                         <span class="text-xs font-bold text-blue-600" id="dropdownReadTime">0小时</span>
@@ -220,7 +154,7 @@
 
                         <button onclick="openUploadModal()" id="addBookBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full font-medium transition-all shadow-lg hover:shadow-xl flex items-center space-x-2 text-sm">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                            <span class="hidden sm:inline">上传</span>
+                            <span class="hidden sm:inline">上传书籍</span>
                         </button>
                     </div>
                 </div>
@@ -232,20 +166,6 @@
             
             <!-- 首页 -->
             <div id="page-home" class="page-section">
-                <!-- 欢迎横幅（仅VIP显示升级提示或欢迎） -->
-                <div id="vipBanner" class="hidden mb-6 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl p-6 text-white shadow-lg">
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <h2 class="text-xl font-bold mb-2">升级VIP会员</h2>
-                            <p class="text-sm opacity-90">解锁所有付费书籍、去广告阅读、专属客服支持</p>
-                        </div>
-                        <button onclick="upgradeVip()" class="bg-white text-purple-600 px-6 py-2 rounded-full font-bold text-sm hover:bg-gray-100 transition-all shadow-md">
-                            立即升级
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 统计栏 -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                     <div class="bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-sm border border-gray-100 dark:border-gray-700">
                         <div class="text-2xl font-bold text-gray-900 dark:text-white mb-1" id="statTotal">0</div>
@@ -265,7 +185,6 @@
                     </div>
                 </div>
 
-                <!-- 最近阅读 -->
                 <div id="recentSection" class="mb-8 hidden">
                     <div class="flex justify-between items-center mb-4">
                         <h2 class="text-lg font-bold text-gray-900 dark:text-white flex items-center">
@@ -277,7 +196,6 @@
                     <div id="recentBooks" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
                 </div>
 
-                <!-- 筛选标签 -->
                 <div class="flex flex-wrap gap-2 mb-6 items-center justify-between">
                     <div class="flex flex-wrap gap-2">
                         <button onclick="filterBooks('all')" class="filter-btn active px-4 py-2 rounded-full bg-blue-600 text-white text-sm font-medium transition-all" data-filter="all">
@@ -300,33 +218,34 @@
                     </select>
                 </div>
 
-                <!-- 书籍网格 -->
                 <div id="booksGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
                 
-                <!-- 空状态 -->
                 <div id="emptyState" class="hidden flex-col items-center justify-center py-20 text-center">
                     <div class="w-24 h-24 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mb-4">
                         <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                     </div>
                     <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">暂无书籍</h3>
-                    <p class="text-gray-500 dark:text-gray-400 mb-4">点击右上角添加您的第一本电子书</p>
+                    <p class="text-gray-500 dark:text-gray-400 mb-4">点击右上角上传您的第一本电子书</p>
                 </div>
             </div>
 
             <!-- 管理员后台 -->
             <div id="page-admin" class="page-section hidden">
                 <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">管理员控制台</h2>
+                <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-xl p-4 mb-6">
+                    <p class="text-sm text-yellow-800 dark:text-yellow-200">
+                        <span class="font-bold">提示：</span>当前为封闭平台模式，新用户需由管理员在后台添加账号。
+                    </p>
+                </div>
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <!-- 用户管理 -->
                     <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="font-bold text-lg text-gray-900 dark:text-white">用户管理</h3>
-                            <span class="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full text-gray-600 dark:text-gray-400" id="totalUsers">0人</span>
+                            <button onclick="showAddUserModal()" class="text-sm bg-blue-600 text-white px-3 py-1 rounded-lg hover:bg-blue-700 transition-colors">+ 添加用户</button>
                         </div>
                         <div class="space-y-3 max-h-96 overflow-y-auto custom-scroll" id="adminUserList"></div>
                     </div>
                     
-                    <!-- 书籍管理 -->
                     <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700 lg:col-span-2">
                         <h3 class="font-bold text-lg mb-4 text-gray-900 dark:text-white">书籍管理</h3>
                         <div class="overflow-x-auto">
@@ -335,7 +254,7 @@
                                     <tr>
                                         <th class="px-4 py-3 rounded-l-lg">书名</th>
                                         <th class="px-4 py-3">作者</th>
-                                        <th class="px-4 py-3">上传者</th>
+                                        <th class="px-4 py-3">类型</th>
                                         <th class="px-4 py-3">权限</th>
                                         <th class="px-4 py-3 rounded-r-lg">操作</th>
                                     </tr>
@@ -347,9 +266,9 @@
                 </div>
             </div>
 
-            <!-- 个人中心 -->
+            <!-- 其他页面保持不变... -->
             <div id="page-profile" class="page-section hidden">
-                <div class="max-w-4xl mx-auto">
+                <div class="max-w-2xl mx-auto">
                     <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden mb-6">
                         <div class="h-32 bg-gradient-to-r from-blue-500 to-indigo-600"></div>
                         <div class="px-8 pb-8">
@@ -357,17 +276,14 @@
                                 <div class="flex items-end">
                                     <div class="w-24 h-24 rounded-full bg-white dark:bg-gray-800 p-1 shadow-lg">
                                         <div class="w-full h-full rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white text-3xl font-bold" id="profileAvatar">
-                                            U
+                                            云
                                         </div>
                                     </div>
                                     <div class="ml-4 mb-1">
-                                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white" id="profileName">用户名</h2>
-                                        <p class="text-sm text-gray-500 dark:text-gray-400" id="profileRole">普通用户</p>
+                                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white" id="profileName">云书阁</h2>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400" id="profileRole">管理员</p>
                                     </div>
                                 </div>
-                                <button onclick="editProfile()" class="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
-                                    编辑资料
-                                </button>
                             </div>
                             
                             <div class="grid grid-cols-3 gap-4 text-center">
@@ -386,55 +302,14 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- 阅读偏好设置 -->
-                    <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
-                        <h3 class="font-bold text-lg mb-4 text-gray-900 dark:text-white">阅读偏好</h3>
-                        <div class="space-y-4">
-                            <div class="flex justify-between items-center py-3 border-b border-gray-100 dark:border-gray-700">
-                                <div>
-                                    <div class="text-sm font-medium text-gray-900 dark:text-white">自动夜间模式</div>
-                                    <div class="text-xs text-gray-500 dark:text-gray-400">根据时间自动切换（21:00-07:00）</div>
-                                </div>
-                                <label class="relative inline-flex items-center cursor-pointer">
-                                    <input type="checkbox" id="autoDarkMode" class="sr-only peer" onchange="toggleAutoDarkMode(this)">
-                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                                </label>
-                            </div>
-                            <div class="flex justify-between items-center py-3 border-b border-gray-100 dark:border-gray-700">
-                                <div>
-                                    <div class="text-sm font-medium text-gray-900 dark:text-white">翻页模式</div>
-                                    <div class="text-xs text-gray-500 dark:text-gray-400">左右翻页或上下滚动</div>
-                                </div>
-                                <select id="pageMode" onchange="changePageMode(this.value)" class="px-3 py-1 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm">
-                                    <option value="scroll">上下滚动</option>
-                                    <option value="page">左右翻页</option>
-                                </select>
-                            </div>
-                            <div class="flex justify-between items-center py-3">
-                                <div>
-                                    <div class="text-sm font-medium text-gray-900 dark:text-white">字体选择</div>
-                                    <div class="text-xs text-gray-500 dark:text-gray-400">阅读界面字体</div>
-                                </div>
-                                <select id="fontFamily" onchange="changeFontFamily(this.value)" class="px-3 py-1 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm">
-                                    <option value="Noto Serif SC">思源宋体</option>
-                                    <option value="Noto Sans SC">思源黑体</option>
-                                    <option value="serif">系统衬线体</option>
-                                    <option value="sans-serif">系统无衬线体</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
-            <!-- 我的书架 -->
             <div id="page-bookshelf" class="page-section hidden">
                 <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">我的书架</h2>
                 <div id="bookshelfGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
             </div>
 
-            <!-- 阅读记录 -->
             <div id="page-history" class="page-section hidden">
                 <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">阅读记录</h2>
                 <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
@@ -444,9 +319,8 @@
         </main>
     </div>
 
-    <!-- 阅读器界面（全屏覆盖） -->
+    <!-- 阅读器界面 -->
     <div id="reader" class="fixed inset-0 z-50 bg-white transform translate-y-full transition-transform duration-300 flex flex-col hidden">
-        <!-- 阅读器头部 -->
         <div class="glass-effect border-b border-gray-200 dark:border-gray-700 px-6 py-3 flex justify-between items-center h-14">
             <div class="flex items-center space-x-4">
                 <button onclick="closeReader()" class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors">
@@ -463,7 +337,7 @@
                     <svg class="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
                 </button>
                 
-                <button onclick="toggleBookmark()" id="bookmarkBtn" class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors" title="添加书签">
+                <button onclick="toggleBookmark()" id="bookmarkBtn" class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors" title="书签">
                     <svg class="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
                 </button>
 
@@ -476,7 +350,6 @@
                         <button onclick="setReaderTheme('dark')" class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">夜间黑</button>
                         <button onclick="setReaderTheme('sepia')" class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">羊皮纸</button>
                         <button onclick="setReaderTheme('green')" class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">护眼绿</button>
-                        <button onclick="setReaderTheme('blue')" class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">天空蓝</button>
                     </div>
                 </div>
 
@@ -484,16 +357,10 @@
                     <button onclick="changeFontSize(-1)" class="px-2 py-1 text-xs font-bold text-gray-600 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-700 rounded">A-</button>
                     <button onclick="changeFontSize(1)" class="px-2 py-1 text-sm font-bold text-gray-600 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-700 rounded">A+</button>
                 </div>
-
-                <button onclick="toggleSettings()" class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors md:hidden">
-                    <svg class="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                </button>
             </div>
         </div>
 
-        <!-- 阅读内容区 -->
         <div class="flex-1 flex overflow-hidden relative">
-            <!-- 目录侧边栏 -->
             <div id="tocSidebar" class="w-0 bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 overflow-y-auto transition-all duration-300 custom-scroll">
                 <div class="p-4">
                     <h3 class="font-bold text-gray-900 dark:text-white mb-4">目录</h3>
@@ -501,28 +368,11 @@
                 </div>
             </div>
 
-            <!-- 内容 -->
-            <div id="readerContainer" class="flex-1 overflow-y-auto custom-scroll relative">
+            <div id="readerContainer" class="flex-1 overflow-y-auto custom-scroll relative" onscroll="updateReadingProgress()">
                 <div id="readerContent" class="reader-content max-w-3xl mx-auto px-6 py-12 text-lg transition-all duration-300 min-h-full"></div>
-            </div>
-
-            <!-- 设置侧边栏（移动端） -->
-            <div id="settingsSidebar" class="absolute right-0 top-0 bottom-0 w-64 bg-white dark:bg-gray-800 shadow-xl transform translate-x-full transition-transform duration-300 z-10 p-4">
-                <h3 class="font-bold mb-4">阅读设置</h3>
-                <div class="space-y-4">
-                    <div>
-                        <label class="text-xs text-gray-500">行间距</label>
-                        <input type="range" min="1" max="3" step="0.5" value="1.8" onchange="changeLineHeight(this.value)" class="w-full">
-                    </div>
-                    <div>
-                        <label class="text-xs text-gray-500">段落间距</label>
-                        <input type="range" min="0" max="40" step="4" value="24" onchange="changeParaSpacing(this.value)" class="w-full">
-                    </div>
-                </div>
             </div>
         </div>
 
-        <!-- 底部进度条 -->
         <div class="glass-effect border-t border-gray-200 dark:border-gray-700 px-6 py-2 flex justify-between items-center text-xs text-gray-500 dark:text-gray-400 h-10">
             <span id="readingProgress">0%</span>
             <div class="flex-1 mx-4 h-1 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden cursor-pointer" onclick="clickProgress(event)">
@@ -532,9 +382,9 @@
         </div>
     </div>
 
-    <!-- 添加书籍模态框 -->
+    <!-- 上传模态框 -->
     <div id="uploadModal" class="fixed inset-0 z-50 hidden">
-        <div class="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm transition-opacity" onclick="closeUploadModal()"></div>
+        <div class="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm" onclick="closeUploadModal()"></div>
         <div class="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
             <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-lg pointer-events-auto animate-fade-in max-h-[90vh] overflow-y-auto">
                 <div class="p-6 border-b border-gray-200 dark:border-gray-700 sticky top-0 bg-white dark:bg-gray-800 z-10 flex justify-between items-center">
@@ -577,8 +427,6 @@
                             <option value="文学">文学</option>
                             <option value="技术">技术</option>
                             <option value="历史">历史</option>
-                            <option value="科幻">科幻</option>
-                            <option value="传记">传记</option>
                             <option value="其他">其他</option>
                         </select>
                     </div>
@@ -594,14 +442,13 @@
                                 </div>
                             </label>
                             <label class="relative flex cursor-pointer">
-                                <input type="radio" name="access" value="vip" class="sr-only peer" ${currentUser && currentUser.role !== 'admin' ? 'disabled' : ''}>
-                                <div class="w-full p-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 peer-checked:border-purple-500 peer-checked:bg-purple-50 dark:peer-checked:bg-purple-900/30 transition-all text-center ${currentUser && currentUser.role !== 'admin' ? 'opacity-50 cursor-not-allowed' : ''}">
+                                <input type="radio" name="access" value="vip" class="sr-only peer">
+                                <div class="w-full p-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 peer-checked:border-purple-500 peer-checked:bg-purple-50 dark:peer-checked:bg-purple-900/30 transition-all text-center">
                                     <div class="font-medium text-gray-900 dark:text-white">VIP</div>
                                     <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">仅会员可见</div>
                                 </div>
                             </label>
                         </div>
-                        ${currentUser && currentUser.role !== 'admin' ? '<p class="text-xs text-orange-500 mt-1">* 只有管理员可以上传VIP书籍</p>' : ''}
                     </div>
 
                     <div class="space-y-2">
@@ -611,7 +458,6 @@
                             <button type="button" onclick="selectColor('red')" class="color-btn w-10 h-10 rounded-full bg-red-500 opacity-60 hover:opacity-100 transition-all" data-color="red"></button>
                             <button type="button" onclick="selectColor('green')" class="color-btn w-10 h-10 rounded-full bg-green-500 opacity-60 hover:opacity-100 transition-all" data-color="green"></button>
                             <button type="button" onclick="selectColor('purple')" class="color-btn w-10 h-10 rounded-full bg-purple-500 opacity-60 hover:opacity-100 transition-all" data-color="purple"></button>
-                            <button type="button" onclick="selectColor('orange')" class="color-btn w-10 h-10 rounded-full bg-orange-500 opacity-60 hover:opacity-100 transition-all" data-color="orange"></button>
                         </div>
                         <input type="hidden" id="coverColor" value="blue">
                     </div>
@@ -624,55 +470,81 @@
         </div>
     </div>
 
+    <!-- 添加用户模态框（管理员） -->
+    <div id="addUserModal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm" onclick="closeAddUserModal()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-md pointer-events-auto animate-fade-in p-6">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">添加新用户</h3>
+                <form id="addUserForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">用户名 *</label>
+                        <input type="text" id="newUsername" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">密码 *</label>
+                        <input type="password" id="newPassword" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">昵称</label>
+                        <input type="text" id="newNickname" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <label class="flex items-center">
+                            <input type="checkbox" id="newIsVip" class="rounded text-blue-600 focus:ring-blue-500 mr-2">
+                            <span class="text-sm text-gray-700 dark:text-gray-300">VIP会员</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-lg transition-all">
+                        创建用户
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- 数据备份模态框 -->
     <div id="backupModal" class="fixed inset-0 z-50 hidden">
         <div class="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm" onclick="closeBackupModal()"></div>
         <div class="absolute inset-0 flex items-center justify-center p-4">
             <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-2xl p-6 animate-fade-in">
                 <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">数据管理</h3>
-                
                 <div class="space-y-4">
                     <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
                         <h4 class="font-bold mb-2 text-sm">导出数据</h4>
-                        <p class="text-xs text-gray-500 mb-3">备份所有书籍和用户数据到JSON文件</p>
-                        <button onclick="exportData()" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 transition-colors">
-                            下载备份文件
-                        </button>
+                        <button onclick="exportData()" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700">下载备份</button>
                     </div>
-                    
                     <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
                         <h4 class="font-bold mb-2 text-sm">导入数据</h4>
-                        <p class="text-xs text-gray-500 mb-3">从JSON文件恢复数据（会覆盖现有数据）</p>
-                        <input type="file" id="importFile" accept=".json" onchange="importData(this)" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                        <input type="file" id="importFile" accept=".json" onchange="importData(this)" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700">
                     </div>
-                    
-                    <div class="p-4 bg-red-50 dark:bg-red-900/20 rounded-xl border border-red-200 dark:border-red-800">
-                        <h4 class="font-bold mb-2 text-sm text-red-600 dark:text-red-400">危险区域</h4>
-                        <button onclick="clearAllData()" class="px-4 py-2 bg-red-600 text-white rounded-lg text-sm hover:bg-red-700 transition-colors">
-                            清空所有数据
-                        </button>
+                    <div class="p-4 bg-red-50 dark:bg-red-900/20 rounded-xl border border-red-200">
+                        <button onclick="clearAllData()" class="px-4 py-2 bg-red-600 text-white rounded-lg text-sm hover:bg-red-700">清空所有数据</button>
                     </div>
                 </div>
-                
-                <button onclick="closeBackupModal()" class="mt-6 w-full py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                    关闭
-                </button>
+                <button onclick="closeBackupModal()" class="mt-6 w-full py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">关闭</button>
             </div>
         </div>
     </div>
 
     <!-- 提示消息 -->
-    <div id="toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 dark:bg-gray-700 text-white px-6 py-3 rounded-full shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 z-50 flex items-center space-x-2">
-        <span id="toastMessage">提示消息</span>
+    <div id="toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-6 py-3 rounded-full shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 z-50">
+        <span id="toastMessage">提示</span>
     </div>
 
     <script>
-        // 数据存储
+        // 初始化数据（仅保留管理员账号）
         let books = JSON.parse(localStorage.getItem('cloudBooks')) || [];
         let users = JSON.parse(localStorage.getItem('cloudUsers')) || [
-            { username: 'admin', password: 'admin', role: 'admin', isVip: true, nickname: '管理员', readTime: 0, joinedAt: new Date().toISOString() },
-            { username: 'user', password: 'user', role: 'user', isVip: false, nickname: '书友', readTime: 0, joinedAt: new Date().toISOString() },
-            { username: 'vip', password: 'vip', role: 'user', isVip: true, nickname: 'VIP书友', readTime: 0, joinedAt: new Date().toISOString() }
+            { 
+                username: '云书阁', 
+                password: 'YSG88888888', 
+                role: 'admin', 
+                isVip: true, 
+                nickname: '管理员',
+                readTime: 0,
+                joinedAt: new Date().toISOString()
+            }
         ];
         let currentUser = null;
         let currentFilter = 'all';
@@ -680,92 +552,17 @@
         let currentBookId = null;
         let bookmarks = JSON.parse(localStorage.getItem('cloudBookmarks')) || {};
         let favorites = JSON.parse(localStorage.getItem('cloudFavorites')) || [];
-        let readingStats = JSON.parse(localStorage.getItem('cloudStats')) || {};
-        let readingStartTime = null;
         let currentTheme = localStorage.getItem('readerTheme') || 'default';
 
-        // 初始化
         document.addEventListener('DOMContentLoaded', () => {
             const savedUser = localStorage.getItem('currentUser');
-            const savedAuth = localStorage.getItem('rememberAuth');
-            
-            if (savedAuth && savedUser) {
+            if (savedUser) {
                 currentUser = JSON.parse(savedUser);
                 showMainApp();
             }
-            
-            // 检查自动夜间模式
-            checkAutoDarkMode();
-            setInterval(checkAutoDarkMode, 60000); // 每分钟检查
         });
 
-        // 登录/注册切换
-        function switchAuthTab(tab) {
-            const loginTab = document.getElementById('tab-login');
-            const regTab = document.getElementById('tab-register');
-            const loginForm = document.getElementById('loginForm');
-            const regForm = document.getElementById('registerForm');
-            
-            if (tab === 'login') {
-                loginTab.classList.add('bg-white', 'dark:bg-gray-600', 'shadow-sm', 'text-gray-900', 'dark:text-white');
-                loginTab.classList.remove('text-gray-500', 'dark:text-gray-400');
-                regTab.classList.remove('bg-white', 'dark:bg-gray-600', 'shadow-sm', 'text-gray-900', 'dark:text-white');
-                regTab.classList.add('text-gray-500', 'dark:text-gray-400');
-                loginForm.classList.remove('hidden');
-                regForm.classList.add('hidden');
-            } else {
-                regTab.classList.add('bg-white', 'dark:bg-gray-600', 'shadow-sm', 'text-gray-900', 'dark:text-white');
-                regTab.classList.remove('text-gray-500', 'dark:text-gray-400');
-                loginTab.classList.remove('bg-white', 'dark:bg-gray-600', 'shadow-sm', 'text-gray-900', 'dark:text-white');
-                loginTab.classList.add('text-gray-500', 'dark:text-gray-400');
-                regForm.classList.remove('hidden');
-                loginForm.classList.add('hidden');
-            }
-        }
-
-        // 注册功能
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('regUsername').value.trim();
-            const nickname = document.getElementById('regNickname').value.trim() || username;
-            const password = document.getElementById('regPassword').value;
-            const confirm = document.getElementById('regPasswordConfirm').value;
-            
-            if (password !== confirm) {
-                showToast('两次输入的密码不一致');
-                return;
-            }
-            
-            if (users.find(u => u.username === username)) {
-                showToast('用户名已存在');
-                return;
-            }
-            
-            const newUser = {
-                username: username,
-                password: password,
-                nickname: nickname,
-                role: 'user',
-                isVip: false,
-                readTime: 0,
-                joinedAt: new Date().toISOString(),
-                settings: {
-                    autoDarkMode: false,
-                    pageMode: 'scroll',
-                    fontFamily: 'Noto Serif SC'
-                }
-            };
-            
-            users.push(newUser);
-            localStorage.setItem('cloudUsers', JSON.stringify(users));
-            
-            showToast('注册成功，请登录');
-            switchAuthTab('login');
-            document.getElementById('loginUsername').value = username;
-        });
-
-        // 登录功能
+        // 登录（移除注册）
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const username = document.getElementById('loginUsername').value;
@@ -775,10 +572,7 @@
             const user = users.find(u => u.username === username && u.password === password);
             if (user) {
                 currentUser = user;
-                localStorage.setItem('currentUser', JSON.stringify(user));
-                if (remember) {
-                    localStorage.setItem('rememberAuth', 'true');
-                }
+                if (remember) localStorage.setItem('currentUser', JSON.stringify(user));
                 showMainApp();
                 showToast('欢迎回来，' + (user.nickname || user.username));
             } else {
@@ -786,41 +580,22 @@
             }
         });
 
-        function quickLogin(type) {
-            const map = { 'user': 'user', 'vip': 'vip', 'admin': 'admin' };
-            document.getElementById('loginUsername').value = map[type];
-            document.getElementById('loginPassword').value = map[type];
-            document.getElementById('loginForm').dispatchEvent(new Event('submit'));
-        }
-
         function showMainApp() {
             document.getElementById('authScreen').classList.add('hidden');
             document.getElementById('mainApp').classList.remove('hidden');
             document.getElementById('mainApp').classList.add('flex');
             
-            // 更新UI
+            const isAdmin = currentUser.role === 'admin';
             const displayName = currentUser.nickname || currentUser.username;
+            
             document.getElementById('userDisplayName').textContent = displayName;
             document.getElementById('dropdownUsername').textContent = displayName;
-            document.getElementById('dropdownRole').textContent = currentUser.role === 'admin' ? '管理员' : (currentUser.isVip ? 'VIP会员' : '普通用户');
-            document.getElementById('userAvatarFallback').textContent = displayName.charAt(0).toUpperCase();
+            document.getElementById('dropdownRole').textContent = isAdmin ? '管理员' : (currentUser.isVip ? 'VIP会员' : '普通用户');
+            document.getElementById('userAvatarFallback').textContent = displayName.charAt(0);
             
-            // VIP横幅
-            if (!currentUser.isVip && currentUser.role !== 'admin') {
-                document.getElementById('vipBanner').classList.remove('hidden');
-            }
-            
-            // 权限控制
-            if (currentUser.role === 'admin') {
+            if (isAdmin) {
                 document.getElementById('adminBtn').classList.remove('hidden');
                 document.getElementById('backupBtn').classList.remove('hidden');
-            }
-            
-            // 加载用户设置
-            if (currentUser.settings) {
-                if (currentUser.settings.autoDarkMode) {
-                    document.getElementById('autoDarkMode').checked = true;
-                }
             }
             
             renderBooks();
@@ -829,26 +604,54 @@
         }
 
         function logout() {
-            // 保存阅读时长
-            if (readingStartTime) {
-                const duration = Math.floor((Date.now() - readingStartTime) / 60000);
-                if (duration > 0) {
-                    currentUser.readTime = (currentUser.readTime || 0) + duration;
-                    const userIndex = users.findIndex(u => u.username === currentUser.username);
-                    if (userIndex > -1) {
-                        users[userIndex] = currentUser;
-                        localStorage.setItem('cloudUsers', JSON.stringify(users));
-                    }
-                }
-            }
-            
             currentUser = null;
             localStorage.removeItem('currentUser');
-            localStorage.removeItem('rememberAuth');
             location.reload();
         }
 
-        // 页面导航
+        // 管理员添加用户（替代注册功能）
+        function showAddUserModal() {
+            document.getElementById('addUserModal').classList.remove('hidden');
+        }
+
+        function closeAddUserModal() {
+            document.getElementById('addUserModal').classList.add('hidden');
+        }
+
+        document.getElementById('addUserForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('newUsername').value.trim();
+            const password = document.getElementById('newPassword').value;
+            const nickname = document.getElementById('newNickname').value.trim() || username;
+            const isVip = document.getElementById('newIsVip').checked;
+            
+            if (users.find(u => u.username === username)) {
+                showToast('用户名已存在');
+                return;
+            }
+            
+            users.push({
+                username: username,
+                password: password,
+                nickname: nickname,
+                role: 'user',
+                isVip: isVip,
+                readTime: 0,
+                joinedAt: new Date().toISOString()
+            });
+            
+            localStorage.setItem('cloudUsers', JSON.stringify(users));
+            showToast('用户创建成功');
+            closeAddUserModal();
+            renderAdminPanel();
+            this.reset();
+        });
+
+        // 其他功能函数（保持之前逻辑）
+        function toggleUserDropdown() {
+            document.getElementById('userDropdown').classList.toggle('hidden');
+        }
+
         function showPage(page) {
             document.querySelectorAll('.page-section').forEach(el => el.classList.add('hidden'));
             document.getElementById(`page-${page}`).classList.remove('hidden');
@@ -860,21 +663,11 @@
             if (page === 'history') renderHistory();
         }
 
-        function toggleUserDropdown() {
-            document.getElementById('userDropdown').classList.toggle('hidden');
-            // 更新阅读时长显示
-            if (currentUser) {
-                const hours = Math.floor((currentUser.readTime || 0) / 60);
-                document.getElementById('dropdownReadTime').textContent = hours + '小时';
-            }
-        }
-
-        // 书籍渲染（带收藏功能）
         function renderBooks(booksToRender = null) {
             const grid = document.getElementById('booksGrid');
             const emptyState = document.getElementById('emptyState');
-            
             let displayBooks = booksToRender || books;
+            
             if (!booksToRender) {
                 if (currentFilter === 'free') displayBooks = books.filter(b => b.access === 'free');
                 else if (currentFilter === 'vip') displayBooks = books.filter(b => b.access === 'vip');
@@ -900,348 +693,31 @@
                         <div class="absolute inset-0 flex items-center justify-center p-6">
                             <h3 class="text-white font-bold text-xl text-center drop-shadow-md line-clamp-3">${escapeHtml(book.title)}</h3>
                         </div>
-                        <div class="absolute top-3 right-3 flex space-x-1">
-                            ${book.access === 'vip' ? '<span class="vip-badge text-white text-xs px-2 py-1 rounded-full font-medium shadow-lg">VIP</span>' : '<span class="free-badge text-white text-xs px-2 py-1 rounded-full font-medium shadow-lg">免费</span>'}
+                        <div class="absolute top-3 right-3">
+                            ${book.access === 'vip' ? '<span class="vip-badge text-white text-xs px-2 py-1 rounded-full">VIP</span>' : '<span class="free-badge text-white text-xs px-2 py-1 rounded-full">免费</span>'}
                         </div>
                         ${isLocked ? '<div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center backdrop-blur-sm"><svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></div>' : ''}
                     </div>
-
                     <div class="p-5">
                         <div class="flex justify-between items-start mb-2">
-                            <h3 class="font-bold text-gray-900 dark:text-white text-lg line-clamp-1 flex-1" title="${escapeHtml(book.title)}">${escapeHtml(book.title)}</h3>
+                            <h3 class="font-bold text-gray-900 dark:text-white text-lg line-clamp-1 flex-1">${escapeHtml(book.title)}</h3>
                             <button onclick="event.stopPropagation(); toggleFavorite(${book.id})" class="ml-2 text-gray-400 hover:text-red-500 transition-colors ${isFav ? 'text-red-500' : ''}">
                                 <svg class="w-5 h-5" fill="${isFav ? 'currentColor' : 'none'}" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                             </button>
                         </div>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-3">${escapeHtml(book.author || '未知作者')} · ${book.category || '未分类'}</p>
-                        
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-3">${escapeHtml(book.author || '未知作者')}</p>
                         <div class="flex justify-between items-center">
-                            <span class="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded">${book.type.toUpperCase()}</span>
-                            ${currentUser.role === 'admin' ? `
-                            <button onclick="event.stopPropagation(); deleteBook(${book.id})" class="text-gray-400 hover:text-red-500 transition-colors">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                            </button>` : ''}
+                            <span class="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 rounded">${book.type.toUpperCase()}</span>
+                            ${currentUser.role === 'admin' ? `<button onclick="event.stopPropagation(); deleteBook(${book.id})" class="text-red-500 hover:text-red-600"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>` : ''}
                         </div>
                     </div>
                 </div>
             `).join('');
         }
 
-        // 收藏功能
-        function toggleFavorite(bookId) {
-            const index = favorites.indexOf(bookId);
-            if (index > -1) {
-                favorites.splice(index, 1);
-                showToast('已取消收藏');
-            } else {
-                favorites.push(bookId);
-                showToast('已添加到书架');
-            }
-            localStorage.setItem('cloudFavorites', JSON.stringify(favorites));
-            renderBooks();
-        }
-
-        function renderBookshelf() {
-            const favBooks = books.filter(b => favorites.includes(b.id));
-            const grid = document.getElementById('bookshelfGrid');
-            if (favBooks.length === 0) {
-                grid.innerHTML = '<div class="col-span-full text-center py-12 text-gray-500">书架是空的，去添加一些书籍吧</div>';
-                return;
-            }
-            grid.innerHTML = favBooks.map(book => `
-                <div class="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 flex items-center space-x-4 cursor-pointer hover:shadow-md transition-all" onclick="openBook(${book.id})">
-                    <div class="w-16 h-20 bg-gradient-to-br ${getGradient(book.coverColor)} rounded shadow-sm flex-shrink-0"></div>
-                    <div class="flex-1 min-w-0">
-                        <h4 class="font-bold text-gray-900 dark:text-white truncate">${escapeHtml(book.title)}</h4>
-                        <p class="text-xs text-gray-500 mt-1">${escapeHtml(book.author || '未知作者')}</p>
-                        <div class="flex items-center mt-2">
-                            <div class="flex-1 bg-gray-200 dark:bg-gray-700 h-1 rounded-full mr-2">
-                                <div class="bg-blue-600 h-1 rounded-full" style="width: ${(book.progress || 0) * 100}%"></div>
-                            </div>
-                            <span class="text-xs text-gray-500">${Math.round((book.progress || 0) * 100)}%</span>
-                        </div>
-                    </div>
-                    <button onclick="event.stopPropagation(); toggleFavorite(${book.id})" class="text-red-500 hover:text-red-600">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                    </button>
-                </div>
-            `).join('');
-        }
-
-        // 打开书籍（优化版）
-        function openBook(id) {
-            const book = books.find(b => b.id === id);
-            if (!book) return;
-
-            if (book.access === 'vip' && !currentUser.isVip && currentUser.role !== 'admin') {
-                showToast('该书籍为会员专享，请先升级会员');
-                return;
-            }
-
-            currentBookId = id;
-            readingStartTime = Date.now();
-            
-            document.getElementById('readerTitle').textContent = book.title;
-            document.getElementById('readerAuthor').textContent = (book.author || '未知作者') + ' · ' + (book.category || '未分类');
-            
-            const contentDiv = document.getElementById('readerContent');
-            const reader = document.getElementById('reader');
-            
-            setReaderTheme(currentTheme);
-            
-            if (book.type === 'html') {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(book.content, 'text/html');
-                const bodyContent = doc.body ? doc.body.innerHTML : book.content;
-                const cleanContent = bodyContent.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
-                contentDiv.innerHTML = `<div class="prose dark:prose-invert max-w-none">${cleanContent}</div>`;
-                extractTOC(doc);
-            } else {
-                const paragraphs = book.content.split(/\n\s*\n/).filter(p => p.trim());
-                contentDiv.innerHTML = paragraphs.map((p, idx) => {
-                    const isChapter = /^[\s\d一二三四五六七八九十百千万零]+[章节卷集部篇].*$/.test(p) || (p.length < 20 && !/[。，！？,.;:"']/.test(p));
-                    if (isChapter) {
-                        return `<h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white border-b pb-2 border-gray-200 dark:border-gray-700" id="chapter-${idx}">${escapeHtml(p)}</h2>`;
-                    }
-                    return `<p class="mb-6 text-justify indent-8 leading-relaxed">${escapeHtml(p)}</p>`;
-                }).join('');
-                generateSimpleTOC(contentDiv);
-            }
-
-            setTimeout(() => {
-                const container = document.getElementById('readerContainer');
-                const progress = book.progress || 0;
-                container.scrollTop = (container.scrollHeight - container.clientHeight) * progress;
-                book.lastRead = new Date().toISOString();
-                saveBooks();
-                renderRecentBooks();
-            }, 100);
-
-            updateBookmarkBtn();
-            reader.classList.remove('hidden');
-            setTimeout(() => reader.classList.remove('translate-y-full'), 10);
-        }
-
-        // 阅读设置功能
-        function changeLineHeight(val) {
-            document.getElementById('readerContent').style.lineHeight = val;
-        }
-
-        function changeParaSpacing(val) {
-            const paragraphs = document.getElementById('readerContent').querySelectorAll('p');
-            paragraphs.forEach(p => p.style.marginBottom = val + 'px');
-        }
-
-        function toggleSettings() {
-            const sidebar = document.getElementById('settingsSidebar');
-            sidebar.classList.toggle('translate-x-full');
-        }
-
-        function changePageMode(mode) {
-            if (!currentUser.settings) currentUser.settings = {};
-            currentUser.settings.pageMode = mode;
-            saveUserSettings();
-            
-            const container = document.getElementById('readerContainer');
-            const content = document.getElementById('readerContent');
-            
-            if (mode === 'page') {
-                container.classList.add('page-mode-page');
-                container.classList.remove('page-mode-scroll', 'overflow-y-auto');
-                content.style.maxWidth = '100vw';
-                content.style.padding = '40px';
-                content.style.columnWidth = '50vw';
-                content.style.columnGap = '80px';
-            } else {
-                container.classList.remove('page-mode-page');
-                container.classList.add('page-mode-scroll', 'overflow-y-auto');
-                content.style.maxWidth = '';
-                content.style.padding = '';
-                content.style.columnWidth = '';
-                content.style.columnGap = '';
-            }
-        }
-
-        function changeFontFamily(font) {
-            document.getElementById('readerContent').style.fontFamily = font;
-            if (!currentUser.settings) currentUser.settings = {};
-            currentUser.settings.fontFamily = font;
-            saveUserSettings();
-        }
-
-        function toggleAutoDarkMode(checkbox) {
-            if (!currentUser.settings) currentUser.settings = {};
-            currentUser.settings.autoDarkMode = checkbox.checked;
-            saveUserSettings();
-            checkAutoDarkMode();
-        }
-
-        function checkAutoDarkMode() {
-            if (!currentUser || !currentUser.settings || !currentUser.settings.autoDarkMode) return;
-            const hour = new Date().getHours();
-            const isDark = hour >= 21 || hour < 7;
-            if (isDark) {
-                document.documentElement.classList.add('dark');
-                if (document.getElementById('reader').classList.contains('translate-y-full') === false) {
-                    setReaderTheme('dark');
-                }
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-        }
-
-        function saveUserSettings() {
-            const idx = users.findIndex(u => u.username === currentUser.username);
-            if (idx > -1) {
-                users[idx] = currentUser;
-                localStorage.setItem('cloudUsers', JSON.stringify(users));
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
-            }
-        }
-
-        // 关闭阅读器（保存阅读时长）
-        function closeReader() {
-            const container = document.getElementById('readerContainer');
-            const scrollPercent = container.scrollTop / (container.scrollHeight - container.clientHeight);
-            const book = books.find(b => b.id === currentBookId);
-            
-            if (book) {
-                book.progress = isNaN(scrollPercent) ? 0 : scrollPercent;
-                saveBooks();
-            }
-            
-            // 统计阅读时长
-            if (readingStartTime) {
-                const duration = Math.floor((Date.now() - readingStartTime) / 60000);
-                if (duration > 0) {
-                    currentUser.readTime = (currentUser.readTime || 0) + duration;
-                    saveUserSettings();
-                }
-            }
-            
-            document.getElementById('reader').classList.add('translate-y-full');
-            setTimeout(() => {
-                document.getElementById('reader').classList.add('hidden');
-                document.getElementById('tocSidebar').style.width = '0';
-            }, 300);
-        }
-
-        // 其他功能函数（保持之前的实现，添加新功能）
-        function updateFileName(input) {
-            if (input.files && input.files[0]) {
-                document.getElementById('fileName').textContent = input.files[0].name;
-                const name = input.files[0].name.replace(/\.(txt|html|htm)$/i, '');
-                if (!document.getElementById('bookTitle').value) {
-                    document.getElementById('bookTitle').value = name;
-                }
-            }
-        }
-
-        function filterBooks(type) {
-            currentFilter = type;
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                if (btn.dataset.filter === type) {
-                    btn.classList.remove('bg-white', 'dark:bg-gray-800', 'text-gray-600', 'dark:text-gray-300', 'border', 'border-gray-200', 'dark:border-gray-700');
-                    btn.classList.add('bg-blue-600', 'text-white');
-                } else {
-                    btn.classList.add('bg-white', 'dark:bg-gray-800', 'text-gray-600', 'dark:text-gray-300', 'border', 'border-gray-200', 'dark:border-gray-700');
-                    btn.classList.remove('bg-blue-600', 'text-white');
-                }
-            });
-            renderBooks();
-        }
-
-        function sortBooks(sortBy) {
-            if (sortBy === 'name') {
-                books.sort((a, b) => a.title.localeCompare(b.title));
-            } else if (sortBy === 'popular') {
-                books.sort((a, b) => (b.progress > 0 ? 1 : 0) - (a.progress > 0 ? 1 : 0));
-            } else {
-                books.sort((a, b) => new Date(b.addedAt) - new Date(a.addedAt));
-            }
-            renderBooks();
-        }
-
-        function searchBooks(keyword) {
-            if (!keyword) {
-                renderBooks();
-                return;
-            }
-            const filtered = books.filter(b => 
-                b.title.toLowerCase().includes(keyword.toLowerCase()) || 
-                b.author.toLowerCase().includes(keyword.toLowerCase())
-            );
-            renderBooks(filtered);
-        }
-
-        // 管理员数据管理
-        function showBackupModal() {
-            document.getElementById('backupModal').classList.remove('hidden');
-        }
-
-        function closeBackupModal() {
-            document.getElementById('backupModal').classList.add('hidden');
-        }
-
-        function exportData() {
-            const data = {
-                books: books,
-                users: users,
-                bookmarks: bookmarks,
-                favorites: favorites,
-                exportDate: new Date().toISOString()
-            };
-            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `云书阁备份_${new Date().toLocaleDateString()}.json`;
-            a.click();
-            showToast('数据已导出');
-        }
-
-        function importData(input) {
-            const file = input.files[0];
-            if (!file) return;
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const data = JSON.parse(e.target.result);
-                    if (data.books) books = data.books;
-                    if (data.users) users = data.users;
-                    if (data.bookmarks) bookmarks = data.bookmarks;
-                    if (data.favorites) favorites = data.favorites;
-                    
-                    localStorage.setItem('cloudBooks', JSON.stringify(books));
-                    localStorage.setItem('cloudUsers', JSON.stringify(users));
-                    localStorage.setItem('cloudBookmarks', JSON.stringify(bookmarks));
-                    localStorage.setItem('cloudFavorites', JSON.stringify(favorites));
-                    
-                    location.reload();
-                } catch (err) {
-                    showToast('文件格式错误');
-                }
-            };
-            reader.readAsText(file);
-        }
-
-        function clearAllData() {
-            if (confirm('确定要清空所有数据吗？此操作不可恢复！')) {
-                localStorage.clear();
-                location.reload();
-            }
-        }
-
-        // 辅助函数（简化版，保持核心功能）
+        // 其他必要函数...
         function getGradient(color) {
-            const map = {
-                blue: 'from-blue-400 to-blue-600',
-                red: 'from-red-400 to-red-600',
-                green: 'from-green-400 to-green-600',
-                purple: 'from-purple-400 to-purple-600',
-                orange: 'from-orange-400 to-orange-600'
-            };
+            const map = { blue: 'from-blue-400 to-blue-600', red: 'from-red-400 to-red-600', green: 'from-green-400 to-green-600', purple: 'from-purple-400 to-purple-600', orange: 'from-orange-400 to-orange-600' };
             return map[color] || map.blue;
         }
 
@@ -1269,46 +745,66 @@
             document.getElementById('statReading').textContent = books.filter(b => b.lastRead).length;
         }
 
-        // 简化版的其他必要函数...
-        function extractTOC(doc) {
-            const toc = document.getElementById('tocContent');
-            const headers = doc.querySelectorAll('h1, h2, h3');
-            toc.innerHTML = headers.length ? Array.from(headers).map((h, i) => 
-                `<div class="py-1 px-2 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer rounded text-sm" onclick="document.querySelectorAll('h1, h2, h3')[${i}].scrollIntoView({behavior: 'smooth'})">${h.textContent}</div>`
-            ).join('') : '<div class="text-gray-400 text-sm">无目录</div>';
+        function toggleFavorite(id) {
+            const idx = favorites.indexOf(id);
+            if (idx > -1) {
+                favorites.splice(idx, 1);
+                showToast('已取消收藏');
+            } else {
+                favorites.push(id);
+                showToast('已收藏');
+            }
+            localStorage.setItem('cloudFavorites', JSON.stringify(favorites));
+            renderBooks();
         }
 
-        function generateSimpleTOC(content) {
-            const chapters = content.querySelectorAll('h2');
-            document.getElementById('tocContent').innerHTML = chapters.length ? Array.from(chapters).map((ch, i) => 
-                `<div class="py-1 px-2 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer rounded text-sm" onclick="document.getElementById('chapter-${Array.from(content.children).indexOf(ch)}').scrollIntoView({behavior: 'smooth'})">${ch.textContent}</div>`
-            ).join('') : '<div class="text-gray-400 text-sm">无章节</div>';
+        function openBook(id) {
+            const book = books.find(b => b.id === id);
+            if (!book) return;
+            if (book.access === 'vip' && !currentUser.isVip && currentUser.role !== 'admin') {
+                showToast('VIP专享，请联系管理员开通');
+                return;
+            }
+            
+            currentBookId = id;
+            document.getElementById('readerTitle').textContent = book.title;
+            document.getElementById('readerAuthor').textContent = book.author || '未知作者';
+            
+            const contentDiv = document.getElementById('readerContent');
+            if (book.type === 'html') {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(book.content, 'text/html');
+                const clean = (doc.body ? doc.body.innerHTML : book.content).replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+                contentDiv.innerHTML = `<div class="prose dark:prose-invert max-w-none">${clean}</div>`;
+            } else {
+                const paragraphs = book.content.split(/\n\s*\n/).filter(p => p.trim());
+                contentDiv.innerHTML = paragraphs.map(p => {
+                    const isChapter = /^[\s\d一二三四五六七八九十百千万零]+[章节卷集部篇].*$/.test(p) || (p.length < 20 && !/[。，！？,.;:"']/.test(p));
+                    return isChapter ? `<h2 class="text-2xl font-bold mt-8 mb-4 border-b pb-2">${escapeHtml(p)}</h2>` : `<p class="mb-6 text-justify indent-8">${escapeHtml(p)}</p>`;
+                }).join('');
+            }
+            
+            setTimeout(() => {
+                const container = document.getElementById('readerContainer');
+                container.scrollTop = (container.scrollHeight - container.clientHeight) * (book.progress || 0);
+                book.lastRead = new Date().toISOString();
+                saveBooks();
+                renderRecentBooks();
+            }, 100);
+            
+            document.getElementById('reader').classList.remove('hidden');
+            setTimeout(() => document.getElementById('reader').classList.remove('translate-y-full'), 10);
         }
 
-        function toggleToc() {
-            const sidebar = document.getElementById('tocSidebar');
-            sidebar.style.width = sidebar.style.width === '280px' ? '0' : '280px';
-        }
-
-        function updateBookmarkBtn() {
-            // 简化实现
-        }
-
-        function toggleBookmark() {
-            showToast('书签功能已保存');
-        }
-
-        function setReaderTheme(theme) {
-            currentTheme = theme;
-            localStorage.setItem('readerTheme', theme);
+        function closeReader() {
             const container = document.getElementById('readerContainer');
-            container.className = 'flex-1 overflow-y-auto custom-scroll relative theme-' + theme;
-        }
-
-        function changeFontSize(delta) {
-            currentFontSize += delta * 2;
-            currentFontSize = Math.max(14, Math.min(32, currentFontSize));
-            document.getElementById('readerContent').style.fontSize = currentFontSize + 'px';
+            const book = books.find(b => b.id === currentBookId);
+            if (book) {
+                book.progress = container.scrollTop / (container.scrollHeight - container.clientHeight);
+                saveBooks();
+            }
+            document.getElementById('reader').classList.add('translate-y-full');
+            setTimeout(() => document.getElementById('reader').classList.add('hidden'), 300);
         }
 
         function updateReadingProgress() {
@@ -1319,30 +815,55 @@
         }
 
         function clickProgress(e) {
-            const bar = e.currentTarget;
-            const pct = e.offsetX / bar.clientWidth;
             const container = document.getElementById('readerContainer');
-            container.scrollTop = (container.scrollHeight - container.clientHeight) * pct;
+            container.scrollTop = (container.scrollHeight - container.clientHeight) * (e.offsetX / e.currentTarget.clientWidth);
+        }
+
+        function toggleToc() {
+            const sidebar = document.getElementById('tocSidebar');
+            sidebar.style.width = sidebar.style.width === '280px' ? '0' : '280px';
+        }
+
+        function setReaderTheme(theme) {
+            currentTheme = theme;
+            localStorage.setItem('readerTheme', theme);
+            document.getElementById('readerContainer').className = `flex-1 overflow-y-auto custom-scroll relative theme-${theme}`;
+        }
+
+        function changeFontSize(delta) {
+            currentFontSize = Math.max(14, Math.min(32, currentFontSize + delta * 2));
+            document.getElementById('readerContent').style.fontSize = currentFontSize + 'px';
+        }
+
+        function filterBooks(type) {
+            currentFilter = type;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.dataset.filter === type) {
+                    btn.classList.remove('bg-white', 'dark:bg-gray-800', 'text-gray-600', 'border', 'border-gray-200');
+                    btn.classList.add('bg-blue-600', 'text-white');
+                } else {
+                    btn.classList.add('bg-white', 'dark:bg-gray-800', 'text-gray-600', 'border', 'border-gray-200');
+                    btn.classList.remove('bg-blue-600', 'text-white');
+                }
+            });
+            renderBooks();
         }
 
         function renderRecentBooks() {
             const recent = books.filter(b => b.lastRead).sort((a, b) => new Date(b.lastRead) - new Date(a.lastRead)).slice(0, 4);
-            const container = document.getElementById('recentSection');
-            if (recent.length === 0) {
-                container.classList.add('hidden');
-                return;
-            }
-            container.classList.remove('hidden');
-            document.getElementById('recentBooks').innerHTML = recent.map(book => `
-                <div onclick="openBook(${book.id})" class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 cursor-pointer hover:shadow-md transition-all">
+            const section = document.getElementById('recentSection');
+            if (recent.length === 0) { section.classList.add('hidden'); return; }
+            section.classList.remove('hidden');
+            document.getElementById('recentBooks').innerHTML = recent.map(b => `
+                <div onclick="openBook(${b.id})" class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 cursor-pointer hover:shadow-md transition-all">
                     <div class="flex items-center space-x-3">
-                        <div class="w-12 h-16 bg-gradient-to-br ${getGradient(book.coverColor)} rounded shadow-sm flex-shrink-0"></div>
+                        <div class="w-12 h-16 bg-gradient-to-br ${getGradient(b.coverColor)} rounded shadow-sm"></div>
                         <div class="flex-1 min-w-0">
-                            <h4 class="font-bold text-gray-900 dark:text-white truncate">${escapeHtml(book.title)}</h4>
-                            <p class="text-xs text-gray-500 mt-1">进度 ${Math.round((book.progress || 0) * 100)}%</p>
+                            <h4 class="font-bold text-gray-900 dark:text-white truncate">${escapeHtml(b.title)}</h4>
                             <div class="w-full bg-gray-200 dark:bg-gray-700 h-1 rounded-full mt-2">
-                                <div class="bg-blue-600 h-1 rounded-full" style="width: ${(book.progress || 0) * 100}%"></div>
+                                <div class="bg-blue-600 h-1 rounded-full" style="width: ${(b.progress || 0) * 100}%"></div>
                             </div>
+                            <p class="text-xs text-gray-500 mt-1">${Math.round((b.progress || 0) * 100)}% 已读</p>
                         </div>
                     </div>
                 </div>
@@ -1350,14 +871,13 @@
         }
 
         function renderAdminPanel() {
-            document.getElementById('totalUsers').textContent = users.length + '人';
             document.getElementById('adminUserList').innerHTML = users.map(u => `
                 <div class="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <div>
                         <div class="font-medium text-gray-900 dark:text-white">${u.nickname || u.username}</div>
                         <div class="text-xs text-gray-500">@${u.username} · ${u.role === 'admin' ? '管理员' : (u.isVip ? 'VIP' : '普通')}</div>
                     </div>
-                    ${u.role !== 'admin' ? `<button onclick="toggleUserVip('${u.username}')" class="text-xs px-3 py-1 rounded-full ${u.isVip ? 'bg-purple-100 text-purple-700' : 'bg-gray-200 text-gray-700'}">${u.isVip ? '取消VIP' : '设为VIP'}</button>` : ''}
+                    ${u.role !== 'admin' ? `<button onclick="toggleUserVip('${u.username}')" class="text-xs px-3 py-1 rounded-full ${u.isVip ? 'bg-purple-100 text-purple-700' : 'bg-gray-200 text-gray-700'}">${u.isVip ? '取消VIP' : '设为VIP'}</button>` : '<span class="text-xs text-gray-400">管理员</span>'}
                 </div>
             `).join('');
             
@@ -1365,7 +885,7 @@
                 <tr class="bg-white dark:bg-gray-800 border-b dark:border-gray-700">
                     <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">${escapeHtml(b.title)}</td>
                     <td class="px-4 py-3 text-gray-600 dark:text-gray-400">${escapeHtml(b.author || '-')}</td>
-                    <td class="px-4 py-3 text-xs text-gray-500">${b.addedBy || '未知'}</td>
+                    <td class="px-4 py-3 text-xs text-gray-500">${b.type}</td>
                     <td class="px-4 py-3"><span class="${b.access === 'vip' ? 'bg-purple-100 text-purple-800' : 'bg-green-100 text-green-800'} text-xs font-medium px-2 py-0.5 rounded">${b.access === 'vip' ? 'VIP' : '免费'}</span></td>
                     <td class="px-4 py-3"><button onclick="deleteBook(${b.id})" class="text-red-600 hover:underline text-xs">删除</button></td>
                 </tr>
@@ -1374,21 +894,37 @@
 
         function toggleUserVip(username) {
             const user = users.find(u => u.username === username);
-            if (user) {
-                user.isVip = !user.isVip;
-                localStorage.setItem('cloudUsers', JSON.stringify(users));
-                renderAdminPanel();
-                showToast(`${username} 已${user.isVip ? '设为' : '取消'}VIP`);
-            }
+            if (user) { user.isVip = !user.isVip; localStorage.setItem('cloudUsers', JSON.stringify(users)); renderAdminPanel(); showToast(`${username} 已${user.isVip ? '设为' : '取消'}VIP`); }
         }
 
         function updateProfilePage() {
             document.getElementById('profileName').textContent = currentUser.nickname || currentUser.username;
             document.getElementById('profileRole').textContent = currentUser.role === 'admin' ? '管理员' : (currentUser.isVip ? 'VIP会员' : '普通用户');
-            document.getElementById('profileAvatar').textContent = (currentUser.nickname || currentUser.username).charAt(0).toUpperCase();
+            document.getElementById('profileAvatar').textContent = (currentUser.nickname || currentUser.username).charAt(0);
             document.getElementById('profileReadTime').textContent = Math.floor((currentUser.readTime || 0) / 60);
             document.getElementById('profileBooks').textContent = books.filter(b => (b.progress || 0) > 0.9).length;
             document.getElementById('profileNotes').textContent = Object.keys(bookmarks).length;
+        }
+
+        function renderBookshelf() {
+            const favBooks = books.filter(b => favorites.includes(b.id));
+            const grid = document.getElementById('bookshelfGrid');
+            if (favBooks.length === 0) { grid.innerHTML = '<div class="col-span-full text-center py-12 text-gray-500">书架是空的</div>'; return; }
+            grid.innerHTML = favBooks.map(b => `
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 flex items-center space-x-4 cursor-pointer hover:shadow-md transition-all" onclick="openBook(${b.id})">
+                    <div class="w-16 h-20 bg-gradient-to-br ${getGradient(b.coverColor)} rounded shadow-sm flex-shrink-0"></div>
+                    <div class="flex-1 min-w-0">
+                        <h4 class="font-bold text-gray-900 dark:text-white truncate">${escapeHtml(b.title)}</h4>
+                        <div class="flex items-center mt-2">
+                            <div class="flex-1 bg-gray-200 dark:bg-gray-700 h-1 rounded-full mr-2">
+                                <div class="bg-blue-600 h-1 rounded-full" style="width: ${(b.progress || 0) * 100}%"></div>
+                            </div>
+                            <span class="text-xs text-gray-500">${Math.round((b.progress || 0) * 100)}%</span>
+                        </div>
+                    </div>
+                    <button onclick="event.stopPropagation(); toggleFavorite(${b.id})" class="text-red-500"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg></button>
+                </div>
+            `).join('');
         }
 
         function renderHistory() {
@@ -1403,10 +939,7 @@
                             <p class="text-xs text-gray-400 mt-1">最后阅读: ${new Date(b.lastRead).toLocaleDateString()}</p>
                         </div>
                     </div>
-                    <div class="text-right">
-                        <div class="text-2xl font-bold text-blue-600">${Math.round((b.progress || 0) * 100)}%</div>
-                        <div class="text-xs text-gray-500">已读</div>
-                    </div>
+                    <div class="text-2xl font-bold text-blue-600">${Math.round((b.progress || 0) * 100)}%</div>
                 </div>
             `).join('') || '<div class="p-8 text-center text-gray-500">暂无阅读记录</div>';
         }
@@ -1418,6 +951,26 @@
             renderBooks();
             updateStats();
             showToast('已删除');
+        }
+
+        function searchBooks(keyword) {
+            if (!keyword) { renderBooks(); return; }
+            renderBooks(books.filter(b => b.title.toLowerCase().includes(keyword.toLowerCase()) || b.author.toLowerCase().includes(keyword.toLowerCase())));
+        }
+
+        function sortBooks(sortBy) {
+            if (sortBy === 'name') books.sort((a, b) => a.title.localeCompare(b.title));
+            else if (sortBy === 'popular') books.sort((a, b) => (b.progress > 0 ? 1 : 0) - (a.progress > 0 ? 1 : 0));
+            else books.sort((a, b) => new Date(b.addedAt) - new Date(a.addedAt));
+            renderBooks();
+        }
+
+        function updateFileName(input) {
+            if (input.files && input.files[0]) {
+                document.getElementById('fileName').textContent = input.files[0].name;
+                const name = input.files[0].name.replace(/\.(txt|html|htm)$/i, '');
+                if (!document.getElementById('bookTitle').value) document.getElementById('bookTitle').value = name;
+            }
         }
 
         function selectColor(color) {
@@ -1433,54 +986,25 @@
             });
         }
 
-        function openUploadModal() {
-            document.getElementById('uploadModal').classList.remove('hidden');
-        }
-
-        function closeUploadModal() {
-            document.getElementById('uploadModal').classList.add('hidden');
-        }
-
-        function toggleThemeDropdown() {
-            document.getElementById('themeDropdown').classList.toggle('hidden');
-        }
-
-        function editProfile() {
-            const newNickname = prompt('请输入新昵称:', currentUser.nickname || '');
-            if (newNickname !== null) {
-                currentUser.nickname = newNickname;
-                saveUserSettings();
-                updateProfilePage();
-                showToast('资料已更新');
-            }
-        }
-
-        function upgradeVip() {
-            showToast('VIP升级功能请联系管理员开通');
-        }
+        function openUploadModal() { document.getElementById('uploadModal').classList.remove('hidden'); }
+        function closeUploadModal() { document.getElementById('uploadModal').classList.add('hidden'); }
+        function toggleThemeDropdown() { document.getElementById('themeDropdown').classList.toggle('hidden'); }
+        function showBackupModal() { document.getElementById('backupModal').classList.remove('hidden'); }
+        function closeBackupModal() { document.getElementById('backupModal').classList.add('hidden'); }
 
         document.getElementById('uploadForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const fileInput = document.getElementById('bookFile');
-            const file = fileInput.files[0];
+            const file = document.getElementById('bookFile').files[0];
             if (!file) return;
-            
             const reader = new FileReader();
             reader.onload = function(e) {
                 const type = file.name.endsWith('.html') || file.name.endsWith('.htm') ? 'html' : 'txt';
-                const access = document.querySelector('input[name="access"]:checked').value;
-                
-                if (access === 'vip' && currentUser.role !== 'admin') {
-                    showToast('只有管理员可以上传VIP书籍');
-                    return;
-                }
-                
                 books.push({
                     id: Date.now(),
                     title: document.getElementById('bookTitle').value,
                     author: document.getElementById('bookAuthor').value,
                     category: document.getElementById('bookCategory').value,
-                    access: access,
+                    access: document.querySelector('input[name="access"]:checked').value,
                     coverColor: document.getElementById('coverColor').value,
                     type: type,
                     content: e.target.result,
@@ -1488,7 +1012,6 @@
                     addedBy: currentUser.username,
                     progress: 0
                 });
-                
                 saveBooks();
                 renderBooks();
                 updateStats();
@@ -1499,13 +1022,49 @@
             reader.readAsText(file);
         });
 
+        function exportData() {
+            const data = { books, users, bookmarks, favorites, exportDate: new Date().toISOString() };
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `云书阁备份_${new Date().toLocaleDateString()}.json`;
+            a.click();
+            showToast('数据已导出');
+        }
+
+        function importData(input) {
+            const file = input.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    if (data.books) books = data.books;
+                    if (data.users) users = data.users;
+                    if (data.bookmarks) bookmarks = data.bookmarks;
+                    if (data.favorites) favorites = data.favorites;
+                    localStorage.setItem('cloudBooks', JSON.stringify(books));
+                    localStorage.setItem('cloudUsers', JSON.stringify(users));
+                    localStorage.setItem('cloudBookmarks', JSON.stringify(bookmarks));
+                    localStorage.setItem('cloudFavorites', JSON.stringify(favorites));
+                    location.reload();
+                } catch (err) { showToast('文件格式错误'); }
+            };
+            reader.readAsText(file);
+        }
+
+        function clearAllData() {
+            if (confirm('确定要清空所有数据吗？此操作不可恢复！')) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+
         document.addEventListener('click', function(e) {
             if (!e.target.closest('#userMenu')) document.getElementById('userDropdown').classList.add('hidden');
             if (!e.target.closest('#themeMenu')) document.getElementById('themeDropdown').classList.add('hidden');
         });
-
-        // 监听滚动更新进度
-        document.getElementById('readerContainer').addEventListener('scroll', updateReadingProgress);
     </script>
 </body>
 </html>
