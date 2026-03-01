@@ -33,7 +33,7 @@
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
 
-    <!-- 登录界面（已移除注册功能） -->
+    <!-- 登录界面 -->
     <div id="authScreen" class="fixed inset-0 z-50 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
         <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 w-full max-w-md mx-4 animate-fade-in">
             <div class="text-center mb-8">
@@ -59,21 +59,26 @@
                     <label class="flex items-center text-gray-500 dark:text-gray-400 cursor-pointer">
                         <input type="checkbox" id="rememberMe" class="mr-2 rounded text-blue-600 focus:ring-blue-500"> 记住我
                     </label>
+                    <button type="button" onclick="resetLocalData()" class="text-xs text-gray-400 hover:text-red-500 underline">清除本地缓存</button>
                 </div>
                 <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-lg">
                     登录
                 </button>
             </form>
             
-            <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 text-center">
-                <p class="text-sm text-gray-500 dark:text-gray-400 mb-3">本平台已关闭公开注册</p>
-                <p class="text-xs text-gray-400 dark:text-gray-500">如需账号，请联系管理员 <span class="text-blue-600 font-medium">云书阁</span></p>
-                
-                <div class="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                    <p class="text-xs text-blue-600 dark:text-blue-400 font-medium">管理员账号：云书阁</p>
-                    <p class="text-xs text-blue-600 dark:text-blue-400 mt-1">密码：YSG88888888</p>
+            <div class="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-100 dark:border-blue-800">
+                <p class="text-sm text-blue-800 dark:text-blue-200 font-medium mb-2">默认管理员账号：</p>
+                <div class="flex justify-between items-center text-sm text-blue-700 dark:text-blue-300 mb-1">
+                    <span>用户名：</span>
+                    <span class="font-mono font-bold">云书阁</span>
+                </div>
+                <div class="flex justify-between items-center text-sm text-blue-700 dark:text-blue-300">
+                    <span>密码：</span>
+                    <span class="font-mono font-bold">YSG88888888</span>
                 </div>
             </div>
+            
+            <p class="mt-4 text-center text-xs text-gray-400 dark:text-gray-500">若无法登录，请点击"清除本地缓存"重置数据</p>
         </div>
     </div>
 
@@ -266,7 +271,7 @@
                 </div>
             </div>
 
-            <!-- 其他页面保持不变... -->
+            <!-- 个人中心 -->
             <div id="page-profile" class="page-section hidden">
                 <div class="max-w-2xl mx-auto">
                     <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden mb-6">
@@ -470,7 +475,7 @@
         </div>
     </div>
 
-    <!-- 添加用户模态框（管理员） -->
+    <!-- 添加用户模态框 -->
     <div id="addUserModal" class="fixed inset-0 z-50 hidden">
         <div class="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm" onclick="closeAddUserModal()"></div>
         <div class="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
@@ -527,25 +532,37 @@
         </div>
     </div>
 
-    <!-- 提示消息 -->
     <div id="toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-6 py-3 rounded-full shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 z-50">
         <span id="toastMessage">提示</span>
     </div>
 
     <script>
-        // 初始化数据（仅保留管理员账号）
-        let books = JSON.parse(localStorage.getItem('cloudBooks')) || [];
-        let users = JSON.parse(localStorage.getItem('cloudUsers')) || [
-            { 
-                username: '云书阁', 
-                password: 'YSG88888888', 
-                role: 'admin', 
-                isVip: true, 
-                nickname: '管理员',
-                readTime: 0,
-                joinedAt: new Date().toISOString()
+        // 初始化：确保管理员账号存在（修复登录问题的关键）
+        function initData() {
+            let storedUsers = localStorage.getItem('cloudUsers');
+            let users = storedUsers ? JSON.parse(storedUsers) : [];
+            
+            // 检查是否存在管理员账号，如果不存在则创建
+            const adminExists = users.find(u => u.username === '云书阁');
+            if (!adminExists) {
+                users.push({
+                    username: '云书阁',
+                    password: 'YSG88888888',
+                    role: 'admin',
+                    isVip: true,
+                    nickname: '管理员',
+                    readTime: 0,
+                    joinedAt: new Date().toISOString()
+                });
+                localStorage.setItem('cloudUsers', JSON.stringify(users));
+                console.log('已自动创建管理员账号：云书阁 / YSG88888888');
             }
-        ];
+            return users;
+        }
+
+        // 数据存储
+        let books = JSON.parse(localStorage.getItem('cloudBooks')) || [];
+        let users = initData(); // 使用初始化函数确保管理员存在
         let currentUser = null;
         let currentFilter = 'all';
         let currentFontSize = 18;
@@ -562,12 +579,14 @@
             }
         });
 
-        // 登录（移除注册）
+        // 登录（添加 trim() 防止空格问题）
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const username = document.getElementById('loginUsername').value;
-            const password = document.getElementById('loginPassword').value;
+            const username = document.getElementById('loginUsername').value.trim(); // 去除前后空格
+            const password = document.getElementById('loginPassword').value.trim(); // 去除前后空格
             const remember = document.getElementById('rememberMe').checked;
+            
+            console.log('尝试登录:', username, password); // 调试信息
             
             const user = users.find(u => u.username === username && u.password === password);
             if (user) {
@@ -577,8 +596,26 @@
                 showToast('欢迎回来，' + (user.nickname || user.username));
             } else {
                 showToast('用户名或密码错误');
+                console.log('可用用户:', users); // 调试信息
             }
         });
+
+        // 重置本地数据功能（解决登录问题的备用方案）
+        function resetLocalData() {
+            if (confirm('确定要清除所有本地数据吗？这将重置为初始状态（包含管理员账号）。')) {
+                localStorage.removeItem('cloudUsers');
+                localStorage.removeItem('cloudBooks');
+                localStorage.removeItem('cloudBookmarks');
+                localStorage.removeItem('cloudFavorites');
+                localStorage.removeItem('currentUser');
+                localStorage.removeItem('rememberAuth');
+                
+                // 重新初始化
+                users = initData();
+                showToast('数据已重置，请使用默认账号登录');
+                console.log('数据已重置，管理员账号：云书阁 / YSG88888888');
+            }
+        }
 
         function showMainApp() {
             document.getElementById('authScreen').classList.add('hidden');
@@ -609,7 +646,7 @@
             location.reload();
         }
 
-        // 管理员添加用户（替代注册功能）
+        // 管理员添加用户
         function showAddUserModal() {
             document.getElementById('addUserModal').classList.remove('hidden');
         }
@@ -647,7 +684,6 @@
             this.reset();
         });
 
-        // 其他功能函数（保持之前逻辑）
         function toggleUserDropdown() {
             document.getElementById('userDropdown').classList.toggle('hidden');
         }
@@ -715,7 +751,6 @@
             `).join('');
         }
 
-        // 其他必要函数...
         function getGradient(color) {
             const map = { blue: 'from-blue-400 to-blue-600', red: 'from-red-400 to-red-600', green: 'from-green-400 to-green-600', purple: 'from-purple-400 to-purple-600', orange: 'from-orange-400 to-orange-600' };
             return map[color] || map.blue;
